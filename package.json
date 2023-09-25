@@ -1,0 +1,15 @@
+{
+  "name": "bridge-test-scripts",
+  "version": "1.0.0",
+  "description": "Bridge Test Scripts",
+  "main": "bridgeTest.js",
+  "dependencies": {
+    "ethers": "^5.7.2"
+  },
+  "scripts": {
+    "test": "node bridgeTest.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
