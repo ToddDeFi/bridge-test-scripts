@@ -23,22 +23,20 @@ async function distributeFundsAndTokens() {
   const provider = new ethers.providers.JsonRpcProvider('https://bsc-testnet.blockpi.network/v1/rpc/public');
   const mainWallet = new ethers.Wallet(mainWalletPrivateKey, provider);
 
-  const distributorContractAddress = '0x16B7808Da13237046dF4961eD4EAE5E6A08CaF6B';
+  const distributorContractAddress = '0x7C7b4670b79c62b878d49F6F883F847108739731';
   const distributorContract = new ethers.Contract(distributorContractAddress, distributorContractAbi, mainWallet);
 
   const stablePlusTokenAddress = '0x6Af0c089b809a0E08cf84c6538A46C17dF234Ab3';
   const tokenContract = new ethers.Contract(stablePlusTokenAddress, erc20ContractAbi, mainWallet);
 
-  const tokenAmountToMint = ethers.utils.parseUnits('10', 'ether');
-  const mintTx = await tokenContract.mint(mainWallet.address, tokenAmountToMint);
+  const tokenAmount = ethers.utils.parseUnits('10', 'ether');
+  const mintTx = await tokenContract.mint(distributorContractAddress, tokenAmount);
   await mintTx.wait();
   
   console.log('Успешно создано 10 Stable+ токенов. Хэш транзакции:', mintTx.hash);
 
-  const tokenAmount = ethers.utils.parseUnits('10', 'ether');
-
   // Отправляем транзакцию approve от основного аккаунта
-  const approveTx = await tokenContract.approve(distributorContractAddress, tokenAmountToMint);
+  const approveTx = await tokenContract.approve(distributorContractAddress, tokenAmount);
   await approveTx.wait();
 
   const recipients = [];
