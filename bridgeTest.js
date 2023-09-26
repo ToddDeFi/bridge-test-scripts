@@ -36,8 +36,8 @@ async function distributeFundsAndTokens() {
   console.log('Успешно создано 10 Stable+ токенов. Хэш транзакции:', mintTx.hash);
 
   // Отправляем транзакцию approve от основного аккаунта
-  const approveTx = await tokenContract.approve(distributorContractAddress, tokenAmount);
-  await approveTx.wait();
+  // const approveTx = await tokenContract.approve(distributorContractAddress, tokenAmount);
+  // await approveTx.wait();
 
   const recipients = [];
 
