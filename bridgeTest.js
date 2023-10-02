@@ -63,8 +63,7 @@ async function distributeFundsAndTokens() {
 
   const tokenContract = new ethers.Contract(stablePlusTokenAddress, erc20ContractAbi, mainWallet);
 
-  const tokenAmountToMint = ethers.utils.parseUnits('10', 'ether');
-  const mintTx = await tokenContract.mint(distributorContractAddress, tokenAmountToMint);
+  const mintTx = await tokenContract.mint(distributorContractAddress, tokenAmount);
   await mintTx.wait();
 
   console.log('Successfully created 10 Stable+ tokens. Transaction Hash:', mintTx.hash);
